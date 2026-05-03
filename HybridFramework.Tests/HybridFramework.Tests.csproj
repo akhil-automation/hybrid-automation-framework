@@ -24,6 +24,7 @@
     <PackageReference Include="Reqnroll.NUnit" Version="3.3.4" />
     <PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="3.3.4" />
     <PackageReference Include="RestSharp" Version="114.0.0" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="114.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update = "Config\appsettings.json">
+    <None Update="Config\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -3,9 +3,9 @@ namespace HybridFramework.Tests.API.Models
 {
     public class LoginRequest{
         [JsonProperty("username")]
-        public string Username {get;set;}
+        public string? Username {get;set;}
         [JsonProperty("password")]
-        public string Password {get;set;}
+        public string? Password {get;set;}
         
     }
 }
