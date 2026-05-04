@@ -1,0 +1,39 @@
+name: Hybrid Framework CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore HybridFramework.Tests/HybridFramework.Tests.csproj
+
+    - name: Build
+      run: dotnet build HybridFramework.Tests/HybridFramework.Tests.csproj
+
+    - name: Install Playwright browsers
+      run: pwsh HybridFramework.Tests/bin/Debug/net8.0/playwright.ps1 install
+
+    - name: Run API Tests
+      run: dotnet test HybridFramework.Tests/HybridFramework.Tests.csproj
+           --filter "AuthApiTests|BookingApiTests"
+           --logger "console;verbosity=detailed"
+
+    - name: Run UI Tests
+      run: dotnet test HybridFramework.Tests/HybridFramework.Tests.csproj
+           --filter "Category=UI"
+           --logger "console;verbosity=detailed"
